@@ -1,0 +1,127 @@
+{
+	"version": "2.0",
+	"title": "Immich",
+	"name": "Immich",
+	"icon": "icon.png",
+	"tagline": "Photo management app",
+	"overview": "SELF-HOSTED BACKUP SOLUTION FOR PHOTOS AND VIDEOS ON MOBILE DEVICE.",
+	"thumbnail": "",
+	"screenshots": [
+		],
+	"category": [
+		"Productivity"
+	],
+	"developer": {
+		"name": "CasaOS Team",
+		"website": "",
+		"donate_text": "",
+		"donate_link": ""
+	},
+	"adaptor": {
+		"name": "CasaOS Team",
+		"website": "https://www.casaos.io",
+		"donate_text": "",
+		"donate_link": ""
+	},
+	"support": "",
+	"website": "",
+	"container": {
+		"image": "immich-app/immich-server:release",
+		"shell": "sh",
+		"privileged": false,
+		"network_model": "bridge",
+		"web_ui": {
+			"http": "2283",
+			"path": ""
+		},
+		"health_check": "",
+		"envs": [
+            {
+                "key": "TZ",
+                "value": "$TZ",
+                "configurable": "no",
+                "description": "TimeZone"
+            },
+            {
+                "key": "PUID",
+                "value": "$PUID",
+                "configurable": "no",
+                "description": "Run LazyLibrarian as specified uid."
+            },
+            {
+                "key": "PGID",
+                "value": "$PGID",
+                "configurable": "no",
+                "description": "Run LazyLibrarian as specified gid."
+            },
+			{
+				"key": "UPLOAD",
+				"value": "/DATA/AppData/$AppID/upload",
+				"description": "",
+				"configurable": "no"
+			}
+		],
+		"ports": [
+			{
+				"container": "3001",
+				"host": "2283",
+				"type": "tcp",
+				"allocation": "automatic",
+				"configurable": "no",
+				"description": ""
+			}
+		],
+		"volumes": [
+			{
+				"container": "/var/lib/postgresql/data",
+				"host": "/DATA/AppData/$AppID/pgdata",
+				"mode": "rw",
+				"allocation": "automatic",
+				"configurable": "no",
+				"description": "immich-postgres"
+			},
+			{
+				"container": "/cache",
+				"host": "/DATA/AppData/$AppID/model-cache",
+				"mode": "rw",
+				"allocation": "automatic",
+				"configurable": "no",
+				"description": "immich-machine-learning"
+			},
+			{
+				"container": "/usr/src/app/upload",
+				"host": "/DATA/AppData/$AppID/upload",
+				"mode": "rw",
+				"allocation": "automatic",
+				"configurable": "no",
+				"description": "immich_microservices"
+			}
+		],
+		"devices": [],
+		"constraints": {
+			"min_memory": 64,
+			"min_storage": 128
+		},
+		"restart_policy": "unless-stopped",
+		"sysctls": [],
+		"cap_add": [],
+		"labels": [],
+		"host_name": "Immich",
+		"cmd": []
+	},
+	"abilities": {
+		"notification": false,
+		"widgets": false,
+		"authentication": false,
+		"search": false,
+		"upnp": false
+	},
+	"tips": {
+		"before_install": []
+	},
+	"changelog": {
+		"latest_updates": "",
+		"url": ""
+	},
+	"latest_update_date": ""
+}
